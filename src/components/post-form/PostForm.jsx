@@ -21,36 +21,36 @@ export default function PostForm({ post }) {
 
     const submit = async (data) => {
         if (post) {
-            const file = data.image[0] ? await appwriteService.uplodeFile(data.image[0]) : null;
-            if (file) {
-                await appwriteService.deleteFile(post.img);
-            }
+            // const file = data.image[0] ? await appwriteService.uplodeFile(data.image[0]) : null;
+            // if (file) {
+            //     await appwriteService.deleteFile(post.img);
+            // }
             const title = data.title;
             const content = data.content;
-            const img = data.img;
+            // const img = data.img;
             const status = data.status;
 
             const dbPost = await appwriteService.updatePost(post.$id, {
-                title, content, img, status,
-                img: file ? file.$id : undefined,
+                title, content, status,
+                // img: file ? file.$id : undefined,
             });
 
             if (dbPost) {
                 navigate(`/post/${dbPost.$id}`);
             }
         } else {
-            const file = await appwriteService.uplodeFile(data.image[0]);
+            // const file = await appwriteService.uplodeFile(data.image[0]);
             const title = data.title;
             const slug = data.slug;
             const content = data.content;
             const status = data.status;
-            if (file) {
-                const fileId = file.$id;
-                data.featuredImage = fileId;
-                const dbPost = await appwriteService.createPost({ title, slug, content, img: fileId, status, userId: userData.data.$id });
+            // if (file) {
+                // const fileId = file.$id;
+                // data.featuredImage = fileId;
+                const dbPost = await appwriteService.createPost({ title, slug, content, status, userId: userData.data.$id });
                 if (dbPost) {
                     navigate(`/post/${dbPost.$id}`);
-                }
+                // }
             }
         }
     };
@@ -97,14 +97,14 @@ export default function PostForm({ post }) {
                 <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
             </div>
             <div className="md:w-1/3 px-2">
-                <Input
+                {/* <Input
                     label="Featured Image :"
                     type="file"
                     className="mb-4"
                     accept="image/png, image/jpg, image/jpeg, image/gif"
                     {...register("image", { required: !post })}
-                />
-                {post && (
+                /> */}
+                {/* {post && (
                     <div className="w-full mb-4">
                         <img
                             src={appwriteService.getFilePreview(post.featuredImage)}
@@ -112,7 +112,7 @@ export default function PostForm({ post }) {
                             className="rounded-lg"
                         />
                     </div>
-                )}
+                )} */}
                 <Select
                     options={["active", "inactive"]}
                     label="Status"

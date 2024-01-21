@@ -20,7 +20,7 @@ export default function Post() {
                     const fetchedPost = await appwriteService.getPost(slug);
                     if (fetchedPost) {
                         setPost(fetchedPost);
-                        getImg(fetchedPost.img);
+                        // getImg(fetchedPost.img);
                     } else {
                         navigate("/");
                     }
@@ -44,24 +44,24 @@ export default function Post() {
         });
     };
 
-    async function getImg(fileId) {
-        try {
-            const imagePreview = await appwriteService.getFilePreview(fileId);
-            setImg(imagePreview.href);
-            console.log(imagePreview); // Log the value to the console
-        } catch (error) {
-            console.error("Error fetching image:", error);
-        }
-    }
+    // async function getImg(fileId) {
+    //     try {
+    //         const imagePreview = await appwriteService.getFilePreview(fileId);
+    //         setImg(imagePreview.href);
+    //         console.log(imagePreview); // Log the value to the console
+    //     } catch (error) {
+    //         console.error("Error fetching image:", error);
+    //     }
+    // }
 
     return post ? (
         <div className="py-8 mx-auto max-w-screen-md">
-            <div className="w-full mb-4 relative border rounded-xl p-2">
-                <img
+            <div className="w-full mb-4 relative  rounded-xl p-2">
+                {/* <img
                     src={img}
                     alt={post.title}
                     className="w-full h-auto rounded-xl"
-                />
+                /> */}
 
                 {isAuthor && (
                     <div className="absolute right-2 top-2">
